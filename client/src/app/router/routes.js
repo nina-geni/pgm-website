@@ -1,0 +1,9 @@
+export const LANDING = '/';
+export const HOME = '/home';
+export const BLOG = '/blog';
+export const POST_DETAIL = '/posts/:id';
+export const OPLEIDING = '/opleiding';
+export const WERKPLEKLEREN = '/werkplekleren';
+export const CASES = '/cases';
+export const WIEISWIE = '/wieiswie';
+export const CONTACT = '/contact';

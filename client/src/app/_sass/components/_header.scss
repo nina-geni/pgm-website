@@ -1,0 +1,27 @@
+.nav {
+    justify-content: space-between;
+    align-items: center;
+    font-family: $title;
+    margin: 20px 0;
+
+    &__logo {
+        color: $accent;
+        font-size: 50px;
+        font-weight: bold;
+        text-decoration: none;
+
+        span {
+            font-size: 55px;
+        }
+    }
+    &__item {
+        font-size: 25px;
+        font-weight: bold;
+        color:$main;
+        text-decoration: none;
+
+        &:hover {
+            color: $secondary;
+        }
+    }
+}
