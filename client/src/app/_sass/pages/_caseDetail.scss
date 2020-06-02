@@ -1,0 +1,21 @@
+.picture {
+    width: 45%;
+    margin-bottom: 40px;
+
+    img {
+        width: 100%;
+    }
+}
+.detail-content__pics {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.detail-titlepic__pink {
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail-titlepic {
+    margin-bottom: 40px;
+}

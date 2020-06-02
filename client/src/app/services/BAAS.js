@@ -13,7 +13,19 @@ class BAAS {
   static getPost = async (id) => {
     const response = await fetch(`${DOMAIN}/blog/blog.json`);
     const jsonData = await response.json();
-    return jsonData.find(post => post.id === id);
+    return {
+      data: jsonData.find(post => post.id === id),
+      domain: DOMAIN,
+    };
+  }
+
+  static getBlogRelated = async (id) => {
+    const response = await fetch(`${DOMAIN}/blog/blog.json`);
+    const jsonData = await response.json();
+    return {
+      data: jsonData.filter(post => post.id !== id),
+      domain: DOMAIN,
+    };
   }
 
   static getMedewerkers = async () => {
@@ -65,8 +77,35 @@ class BAAS {
     };
   }
 
+  static getCase = async (id) => {
+    const response = await fetch(`${DOMAIN}/cases/cases.json`);
+    const jsonData = await response.json();
+    return {
+      data: jsonData.find(project => project.id === id),
+      domain: DOMAIN,
+    };
+  }
+
+  static getCaseRelated = async (id) => {
+    const response = await fetch(`${DOMAIN}/cases/cases.json`);
+    const jsonData = await response.json();
+    return {
+      data: jsonData.filter(post => post.id !== id),
+      domain: DOMAIN,
+    };
+  }
+
   static getOpleiding = async () => {
     const response = await fetch(`${DOMAIN}/opleiding/opleiding.json`);
+    const jsonData = await response.json();
+    return {
+      data: jsonData,
+      domain: DOMAIN,
+    };
+  }
+
+  static getHome = async () => {
+    const response = await fetch(`${DOMAIN}/home/home.json`);
     const jsonData = await response.json();
     return {
       data: jsonData,

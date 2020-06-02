@@ -76,7 +76,7 @@ class OpleidingPage {
   async afterRender () {
     const titleElements = document.querySelectorAll('.opleidingen__title');
     const contentElements = document.querySelectorAll('.opleidingen__content');
-    const icons = document.querySelectorAll('.opleiding__title > i');
+    const icons = document.querySelectorAll('.opleidingen__title > i');
 
 
     titleElements.forEach((element) => {
@@ -97,13 +97,13 @@ class OpleidingPage {
             el.classList.remove('show');
             if (el.id === id) {
               el.classList.add('show');
-            } 
+            }
           }
-        })
+        });
 
         ev.target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      })
-    })
+      });
+    });
   }
 
   async mount () {

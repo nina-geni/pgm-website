@@ -1,9 +1,11 @@
 export const LANDING = '/';
 export const HOME = '/home';
 export const BLOG = '/blog';
-export const POST_DETAIL = '/posts/:id';
+export const BLOG_DETAIL = '/blog/:id';
 export const OPLEIDING = '/opleiding';
 export const WERKPLEKLEREN = '/werkplekleren';
 export const CASES = '/cases';
+export const CASES_DETAIL = '/cases/:id';
 export const WIEISWIE = '/wieiswie';
+export const WIEISWIE_DETAIL = '/wieiswie/:id';
 export const CONTACT = '/contact';

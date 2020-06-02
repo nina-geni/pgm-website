@@ -5,7 +5,7 @@ class BlogPage {
     const blogs = await BAAS.getBlog();
     return blogs.data.map(
       blog => `
-        <a href="#" class="main-card" data-navigo>
+        <a href="/#!/blog/${blog.id}" class="main-card" data-navigo>
           <div class="main-card__img">
             <img src="${blogs.domain}${blog.img}">
           </div>

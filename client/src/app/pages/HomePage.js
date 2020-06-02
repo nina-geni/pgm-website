@@ -1,41 +1,62 @@
 import { BAAS } from '../services';
 
-import { routes } from '../router';
-
 class HomePage {
-  async getPosts () {
-    const posts = await BAAS.getPosts();
-    return posts.map(post => `
-      <div class="col-12 col-md-6 col-lg-4 post">
-        <picture class="post__picture">
-          <img src="${post.thumbnailUrl}" />
-        </picture>
-        <h1 class="post__title">${post.title}</h1>
-        <a href="#!${routes.POST_DETAIL.replace(':id', post.id)}">Details</a>
-      </div>`).join('');
+  constructor () {
+    this.slideIndex = 0;
+  }
+
+  async showHome () {
+    const pictures = await BAAS.getHome();
+    return pictures.data.map(
+      picture => `
+        <div class="show-pic">
+          <img src="${pictures.domain}${picture.img}">  
+        </div>
+      `
+    ).join('');
   }
 
   async render () {
     return `
-    <body>
+    <div class="head-page">
     <div class="container">
       <div class="row">
-        <h2 class="headTitle">HOME</h2>
+        <h2 class="head-title">home</h2>
       </div>
     </div>
-    <div class="overlay"></div>
-    <div class="headPicture headPicture__home"></div>
-  </body>
+    <div class="head-picture">
+      <div class="head-picture__overlay"></div>
+      <div class="head-picture__image head-picture__image--home">
+        ${await this.showHome()}
+      </div>
+    </div>
+  </div>
     `;
   }
 
+  showSlides (slideIndex) {
+    let index = slideIndex;
+
+    const slides = document.querySelectorAll('.show-pic');
+
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+    }
+    index++;
+    if (index > slides.length) {
+      index = 1;
+    }
+
+    slides[index - 1].style.display = 'block';
+    setTimeout(() => {
+      this.showSlides(index);
+    }, 5000);
+  }
+
   async afterRender () {
-    const btn = document.querySelector('.btn');
-    btn.addEventListener('click', (ev) => {
-      console.log(ev);
-    });
-    // Connect the listeners
-    return this;
+    // Connect the listenersss
+    const slideIndex = 0;
+    this.showSlides(slideIndex);
   }
 
   async mount () {

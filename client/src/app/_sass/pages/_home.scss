@@ -1,0 +1,21 @@
+.show-pic {
+    display: none;
+    width: 100%;
+    height: 400px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 35%;
+        animation: overlaySlide 1.5s;
+    }
+}
+@keyframes overlaySlide {
+    0% {
+      transform: translate(-100%,0);
+    }
+    100% {
+      transform: translate(0,0);
+    }
+  }

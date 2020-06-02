@@ -5,7 +5,7 @@ class CasesPage {
     const cases = await BAAS.getCases();
     return cases.data.map(
       project => `
-        <a href="#" class="main-card" data-navigo>
+        <a href="/#!/cases/${project.id}" class="main-card" data-navigo>
           <div class="main-card__img">
             <img src="${cases.domain}${project.thumbnail}">
           </div>
