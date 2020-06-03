@@ -23,5 +23,12 @@
         &:hover {
             color: $secondary;
         }
+
+        &.active {
+            color: $accent;
+            font-size: 30px;
+            border-bottom: 5px solid $accent;
+
+        }
     }
 }

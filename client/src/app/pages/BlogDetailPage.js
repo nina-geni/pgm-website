@@ -1,4 +1,5 @@
 import { BAAS } from '../services';
+import { routes } from '../router';
 
 class BlogDetailPage {
   async showPost (id) {
@@ -28,7 +29,7 @@ class BlogDetailPage {
     const relatedBlog = related.data[index];
     console.log(relatedBlog);
     return `
-    <a href="/#!/blog/${relatedBlog.id}" class="main-card" data-navigo>
+    <a href="#!${routes.BLOG_DETAIL.replace(':id', relatedBlog.id)}" class="main-card" data-navigo>
           <div class="main-card__img">
             <img src="${related.domain}${relatedBlog.img}">
           </div>

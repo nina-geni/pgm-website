@@ -1,11 +1,12 @@
 import { BAAS } from '../services';
+import { routes } from '../router';
 
 class CasesPage {
   async showCases () {
     const cases = await BAAS.getCases();
     return cases.data.map(
       project => `
-        <a href="/#!/cases/${project.id}" class="main-card" data-navigo>
+        <a href="#!${routes.CASES_DETAIL.replace(':id', project.id)}" class="main-card" data-navigo>
           <div class="main-card__img">
             <img src="${cases.domain}${project.thumbnail}">
           </div>
@@ -22,8 +23,18 @@ class CasesPage {
     return `
     <div class="head-page">
     <div class="container">
-      <div class="row">
+      <div class="row filter-head">
         <h2 class="head-title">Cases</h2>
+        <select class="filter">
+          <option>@Work 1</option>
+          <option>@Work 2</option>
+          <option>UI/UX Prototyping 1</option>
+          <option>UI/UX prototyping 2</option>
+          <option>Web Design</option>
+          <option>Web Programming 1</option>
+          <option>Web Programming 2</option>
+          <option>Web Programming 3</option>
+      </select>
       </div>
     </div>
     <div class="head-picture">

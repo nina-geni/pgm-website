@@ -1,4 +1,5 @@
 import { BAAS } from '../services';
+import { routes } from '../router';
 
 class CasesDetailPage {
   async showCase (id) {
@@ -33,7 +34,7 @@ class CasesDetailPage {
     const relatedCase = related.data[index];
     console.log(relatedCase);
     return `
-    <a href="/#!/cases/${relatedCase.id}" class="main-card" data-navigo>
+    <a href="#!${routes.CASES_DETAIL.replace(':id', relatedCase.id)}" class="main-card" data-navigo>
           <div class="main-card__img">
             <img src="${related.domain}${relatedCase.thumbnail}">
           </div>

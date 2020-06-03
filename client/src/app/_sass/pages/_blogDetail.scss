@@ -5,10 +5,14 @@
     padding-left: 165px;
     margin-top: 60px;
 
+    h3 {
+        width: 49%;
+    }
+
 
     &__picture {
         height: 410px;
-        width: 836px;
+        width: 49%;
 
         img {
             width: 100%;

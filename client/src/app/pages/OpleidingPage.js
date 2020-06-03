@@ -34,7 +34,7 @@ class OpleidingPage {
     }
     return tempStr;
   }
-  
+
   async render () {
     return `
   <div class="head-page">
@@ -77,7 +77,6 @@ class OpleidingPage {
     const titleElements = document.querySelectorAll('.opleidingen__title');
     const contentElements = document.querySelectorAll('.opleidingen__content');
     const icons = document.querySelectorAll('.opleidingen__title > i');
-
 
     titleElements.forEach((element) => {
       element.addEventListener('click', (ev) => {

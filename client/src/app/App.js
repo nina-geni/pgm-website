@@ -44,7 +44,6 @@ class App {
     this.childrenContainer = document.getElementById('children');
     // Router
     this.router = new Router(this.childrenContainer);
-    this.router.addRoute(routes.LANDING, this.pageHome);
     this.router.addRoute(routes.HOME, this.pageHome);
     this.router.addRoute(routes.BLOG, this.pageBlog);
     this.router.addRoute(routes.BLOG_DETAIL, this.pageBlogDetail);

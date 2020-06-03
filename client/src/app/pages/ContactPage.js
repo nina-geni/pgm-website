@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl';
-
+import { routes } from '../router';
 import { BAAS } from '../services';
 import pointer from '../_static/images/pointer.png';
 
@@ -8,7 +8,7 @@ class ContactPage {
     const contacts = await BAAS.getContacts();
     return contacts.data.map((contact) => {
       return `
-      <a href="#" class="person-card" data-navigo>
+      <a href="#!${routes.WIEISWIE_DETAIL.replace(':id', contact.id)}" class="person-card" data-navigo>
         <img src="${contacts.domain}${contact.image}">
         <div class="person-card__overlay"></div>
         <div class="person-card__text">
@@ -42,7 +42,6 @@ class ContactPage {
             <a href="https://www.instagram.com/explore/locations/354987211999862/graduaat-programmeren-arteveldehogeschool/?hl=nl&fbclid=IwAR0RVc6fFrcWkKjY7kVmFsS5r84gUUavnAoj54dtULhLswaLivBlF1pYA5c" target="_blank"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
-        
         <div id="map"></div>
       </div>
       <div class="container">

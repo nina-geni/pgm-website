@@ -19,3 +19,35 @@
       transform: translate(0,0);
     }
   }
+.home-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    &__pic {
+        width: 835px;
+        height: 410px;
+        padding-right: 40px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    a {
+        color: $accent;
+        font-family: $title;
+        font-weight: bold;
+        font-size: 35px;
+        text-decoration: none;
+    }
+    a:hover {
+        i {
+            padding-left: 10px;
+            transition: padding-left .5s ease-in-out;
+        }
+    }
+    &__button {
+        margin-top: 25px;
+    }
+}

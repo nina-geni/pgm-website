@@ -1,76 +1,57 @@
 import { BAAS } from '../services';
 
 class WieIsWieDetail {
-  async showCase (id) {
-    const project = await BAAS.getCase(id);
-    return `
-      <div class="detail-titlepic">
-        <h3>${project.data.title}</h3>
-        <div class="detail-titlepic__picture">
-          <img src="${project.domain}${project.data.thumbnail}">
-          <div class="detail-titlepic__pink"><div>©${project.data.jaar} ${project.data.student.join(', ')}</div><div>created for ${project.data.vak}</div></div>
+  async showMember (id) {
+    const memberMedewerker = await BAAS.getTeamMedewerker(parseInt(id, 10));
+    const memberStudent = await BAAS.getTeamStudent(id);
+    let tempStr = '';
+    console.log(memberMedewerker.data);
+    console.log(memberStudent.data);
+    if (memberMedewerker.data !== undefined) {
+      tempStr = `
+      <div class="detail-wieiswie">
+        <div class="detail-wieiswie__content">
+          <h3>${memberMedewerker.data.firstname} ${memberMedewerker.data.lastname}</h3>
+          <p class="text-title">Medewerker</p>
+          <p class="text-title__sub">Functie:</p>
+          <p>${memberMedewerker.data.functie}</p>
+          <p>${memberMedewerker.data.extraFunctie}</p>
+          ${memberMedewerker.data.docent ? '<p>Docent</p>' : ''}
+          ${memberMedewerker.data.docent ? `<p class="text-title__sub">Vakken:</p><p>${memberMedewerker.data.vak.join(', ')}</p>` : ''}
         </div>
-      </div>
-      <div class="container">
-        <div class="row detail-content">
-          <div class="col-md-7">
-            ${project.data.Omschrijving}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 detail-content__pics">
-            ${await this.getPics(project.data.pics, project.domain)}
-          </div>
+        <div class="detail-wieiswie__pic">
+          <img src="${memberMedewerker.domain}${memberMedewerker.data.image}">
         </div>
       </div>
     `;
-  }
+    }
 
-  async relatedCase (id) {
-    const related = await BAAS.getCaseRelated(id);
-    const index = Math.floor(Math.random() * related.data.length);
-    console.log(related);
-    const relatedCase = related.data[index];
-    console.log(relatedCase);
-    return `
-    <a href="/#!/cases/${relatedCase.id}" class="main-card" data-navigo>
-          <div class="main-card__img">
-            <img src="${related.domain}${relatedCase.thumbnail}">
-          </div>
-          <div class="main-card__overlay"></div>
-          <div class="main-card__text">
-            <p class="main-card__title">${relatedCase.title}</p>
-            <p class="main-card__link">Lees Meer <i class="fas fa-arrow-right"></i></p>
-          </div>
-        </a>`;
-  }
+    if (memberStudent.data !== undefined) {
+      tempStr = `
+      <div class="detail-wieiswie">
+        <div class="detail-wieiswie__content">
+          <h3>${memberStudent.data.fields.name_first} ${memberStudent.data.fields.name_last}</h3>
+          <p class="text-title">Student</p>
+          <p>${memberStudent.data.fields.about}</p>
+          <p class="detail-wieiswie__quote"><strong>"${memberStudent.data.fields.quote_alt}"</strong></p>
+          <p class="text-title__sub">Favoriete vak:</p>
+          <p>${memberStudent.data.fields.favourite}</p>
+          <p class="text-title__sub">Intresses:</p>
+          <p>${memberStudent.data.fields.interests}</p>
+        </div>
+        <div class="detail-wieiswie__pic">
+          <img src="${memberStudent.data.fields.img[0].thumbnails.large.url}">
+        </div>
+      </div>
+    `;
+    }
 
-  getPics (pics, domain) {
-    let tempStr = '';
-    pics.forEach((e) => {
-      if (e.type !== 'model') {
-        tempStr += `
-          <div class="picture">
-            <img src="${domain}${e.src}">
-          </div>
-        `;
-      }
-    });
     return tempStr;
   }
 
   async render (params) {
     return `     
-    ${await this.showCase(params.id)}
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 main-cards">
-          <h3>Lees ook</h3>
-          ${await this.relatedCase(params.id)}
-        </div>
-      </div>
-    </div>
-
+      ${await this.showMember(params.id)}
     `;
   }
 

@@ -20,15 +20,16 @@ class Header {
   }
 
   async afterRender () {
+    // n
   }
 
   updateActiveLink (route) {
-    const prevActiveMenuItemElement = document.querySelector(`.nav__item > a[class*="active"]`);
+    const prevActiveMenuItemElement = document.querySelector(`.nav__item[class*="active"]`);
     if (prevActiveMenuItemElement) {
       prevActiveMenuItemElement.classList.remove('active');
     }
     const link = route.replace('#!', '');
-    const menuItemElement = document.querySelector(`.nav__item > a[href*="${link}"]`);
+    const menuItemElement = document.querySelector(`.nav__item[href*="${link}"]`);
     if (menuItemElement) {
       menuItemElement.classList.add('active');
     }    

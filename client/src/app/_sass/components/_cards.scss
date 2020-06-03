@@ -1,7 +1,10 @@
 .person-cards {
-    display: flex;
+    display: none;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+.show-persons {
+    display: flex;
 }
 .person-card {
     width: 328px;

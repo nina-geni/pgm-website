@@ -1,11 +1,12 @@
 import { BAAS } from '../services';
+import { routes } from '../router';
 
 class BlogPage {
   async showBlog () {
     const blogs = await BAAS.getBlog();
     return blogs.data.map(
       blog => `
-        <a href="/#!/blog/${blog.id}" class="main-card" data-navigo>
+        <a href="#!${routes.BLOG_DETAIL.replace(':id', blog.id)}" class="main-card" data-navigo>
           <div class="main-card__img">
             <img src="${blogs.domain}${blog.img}">
           </div>

@@ -1,5 +1,4 @@
-export const LANDING = '/';
-export const HOME = '/home';
+export const HOME = '/';
 export const BLOG = '/blog';
 export const BLOG_DETAIL = '/blog/:id';
 export const OPLEIDING = '/opleiding';

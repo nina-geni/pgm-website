@@ -28,12 +28,6 @@ class BAAS {
     };
   }
 
-  static getMedewerkers = async () => {
-    const response = await fetch(`${DOMAIN}/medewerkers/medewerkers.json`);
-    const jsonData = await response.json();
-    return jsonData;
-  }
-
   static getMedewerker = async (id) => {
     const response = await fetch(`${DOMAIN}/medewerkers/medewerkers.json`);
     const jsonData = await response.json();
@@ -50,7 +44,7 @@ class BAAS {
     };
   }
 
-  static getTeamMedewerkers = async (id) => {
+  static getTeamMedewerkers = async () => {
     const response = await fetch(`${DOMAIN}/medewerkers/medewerkers.json`);
     const jsonData = await response.json();
     return {
@@ -59,11 +53,30 @@ class BAAS {
     };
   }
 
-  static getTeamStudents = async (id) => {
+  static getTeamMedewerker = async (id) => {
+    const response = await fetch(`${DOMAIN}/medewerkers/medewerkers.json`);
+    const jsonData = await response.json();
+    console.log(id);
+    return {
+      data: jsonData.find(medewerker => medewerker.id === id),
+      domain: DOMAIN,
+    };
+  }
+
+  static getTeamStudents = async () => {
     const response = await fetch(`${DOMAIN}/studenten/studenten.json`);
     const jsonData = await response.json();
     return {
       data: jsonData,
+      domain: DOMAIN,
+    };
+  }
+
+  static getTeamStudent = async (id) => {
+    const response = await fetch(`${DOMAIN}/studenten/studenten.json`);
+    const jsonData = await response.json();
+    return {
+      data: jsonData.records.find(student => student.id === id),
       domain: DOMAIN,
     };
   }
