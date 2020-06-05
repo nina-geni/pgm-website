@@ -41,3 +41,17 @@
         }
     }
 }
+@media (max-width: 500px) {
+    .detail-wieiswie {
+        flex-direction: column;
+        padding-left: 0;
+
+        &__content {
+            width: 90%;
+        }
+        &__pic {
+            width: 90%;
+            margin-top: 40px;
+        }
+    }
+}

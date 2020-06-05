@@ -77,4 +77,12 @@ textarea::placeholder {
         }
     }
 }
-
+@media (max-width: 500px) {
+    .address {
+        flex-direction: column;
+        padding-left: 0;
+        text-align: center;
+        padding-left: 5px;
+        padding-right: 5Px;
+    }
+}

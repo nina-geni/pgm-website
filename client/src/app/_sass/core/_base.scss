@@ -135,3 +135,23 @@ select {
       transform: translate(0,0);
     }
   }
+
+  @media (max-width: 500px) {
+    .head-title {
+        padding-left: 10px;
+    }
+    .head-page {
+
+        .head-picture {
+
+            &__overlay  {
+                width: 80%;
+            }
+
+            }
+        }
+    select {
+        margin-left: 10px;
+    }
+}
+

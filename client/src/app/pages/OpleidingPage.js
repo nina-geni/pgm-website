@@ -107,6 +107,12 @@ class OpleidingPage {
 
   async mount () {
     // Before the rendering of the page
+    const hamburgerElement = document.querySelector('.hamb');
+    const navElement = document.querySelector('.nav__list');
+    document.body.style.overflow = 'initial';
+    navElement.classList.remove('nav__list--show');
+    hamburgerElement.classList.add('fa-bars');
+    hamburgerElement.classList.remove('fa-times');
     return this;
   }
 

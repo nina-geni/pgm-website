@@ -14,8 +14,16 @@
             font-size: 55px;
         }
     }
+    i {
+        cursor: pointer;
+        position: relative;
+        z-index: 6;
+        display: none;
+        font-size: 48px;
+    }
     &__item {
         font-size: 25px;
+        margin-left: 5px;
         font-weight: bold;
         color:$main;
         text-decoration: none;
@@ -31,4 +39,40 @@
 
         }
     }
+}
+
+
+@media (max-width: 1200px) {
+    .nav {
+        i {
+            display: block;
+        }
+        &__list {
+            transition: transform .5s ease-in-out;
+            transform: translateX(200%);
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 5;
+            width: 100%;
+            height: 100vh;
+            background-color: $background;
+
+            &--show {
+                transform: translateX(0%);
+            }
+        }
+
+        &__item {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 32px;
+
+            &:first-child {
+                margin-top: 100px;
+            }
+        }
+    }
+
 }

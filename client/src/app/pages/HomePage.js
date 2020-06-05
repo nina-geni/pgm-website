@@ -47,7 +47,7 @@ class HomePage {
       <img src="${computer}">
     </div>
     <div>
-      <a  href="${routes.OPLEIDING}">Graduaat<br></brQ>Programmeren <i class="fas fa-arrow-right"></i></a>
+      <a  href="#!${routes.OPLEIDING}">Graduaat<br></brQ>Programmeren <i class="fas fa-arrow-right"></i></a>
       <div class="button-hold home-content__button">
         <div class="button">
           <button><a href="https://webregistratie.arteveldehs.be" target="_blank">SCHRIJF JE IN</a></button>
@@ -67,7 +67,7 @@ class HomePage {
     <div class="home-content__pic">
       <img src="${klas}">
     </div>
-    <a href="${routes.WIEISWIE}">Ontdek ons team <i class="fas fa-arrow-right"></i></a>
+    <a href="#!${routes.WIEISWIE}">Ontdek ons team <i class="fas fa-arrow-right"></i></a>
   </div>
     `;
   }
@@ -137,6 +137,12 @@ class HomePage {
 
   async mount () {
     // Before the rendering of the page
+    const hamburgerElement = document.querySelector('.hamb');
+    const navElement = document.querySelector('.nav__list');
+    document.body.style.overflow = 'initial';
+    navElement.classList.remove('nav__list--show');
+    hamburgerElement.classList.add('fa-bars');
+    hamburgerElement.classList.remove('fa-times');
     return this;
   }
 

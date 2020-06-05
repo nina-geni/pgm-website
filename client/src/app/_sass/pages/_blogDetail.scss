@@ -44,3 +44,19 @@
         margin-top: 40px;
     }
 }
+@media (max-width: 500px) {
+    .detail-titlepic {
+        flex-direction: column;
+        padding-left: 0;
+
+        h3 {
+            width: 90%;
+        }
+        &__picture {
+            width: 90%;
+        }
+    }
+    .detail-content {
+        margin-left: 0;
+    }
+}

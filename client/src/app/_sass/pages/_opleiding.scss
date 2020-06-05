@@ -145,4 +145,21 @@ iframe {
     margin-bottom: 40px;
     pointer-events: all;
 }
+@media (max-width: 500px) {
+    .opleidingen {
 
+        &__title {
+            justify-content: left;
+            
+            h3 {
+                font-size: 20px;
+            }
+        }
+    }
+    iframe {
+        height: 300px;
+    }
+    .head-button {
+        margin-left: 30px;
+    }
+}

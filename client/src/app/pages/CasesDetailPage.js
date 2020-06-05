@@ -1,9 +1,16 @@
+import * as THREE from 'three/build/three.module';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
 import { BAAS } from '../services';
 import { routes } from '../router';
 
 class CasesDetailPage {
   async showCase (id) {
     const project = await BAAS.getCase(id);
+    if(project.data === undefined) {
+      window.location.assign('#!/404');
+    }
     return `
       <div class="detail-titlepic">
         <h3>${project.data.title}</h3>
@@ -55,6 +62,11 @@ class CasesDetailPage {
             <img src="${domain}${e.src}">
           </div>
         `;
+      } else {
+        window.localStorage.setItem('model', `${domain}${e.src}`);
+        tempStr += `
+          <div class="model"></div>
+        `;
       }
     });
     return tempStr;
@@ -76,7 +88,61 @@ class CasesDetailPage {
   }
 
   async afterRender () {
-    // Connect the listeners
+    if (window.localStorage.getItem('model') !== null) {
+      const model = window.localStorage.getItem('model');
+      console.log(model);
+
+      // Renderer
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(document.querySelector('.model').offsetWidth, document.querySelector('.model').offsetHeight);
+      renderer.outputEncoding = THREE.sRGBEncoding;
+
+      // Canvas Element
+      const canvas = renderer.domElement;
+      document.querySelector('.model').appendChild(canvas);
+
+      // Scene
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x999999);
+
+      // Camera
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight);
+
+      camera.position.set(4.8, 4.8, 4.8);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+      // Controls
+      const controls = new OrbitControls(camera, canvas);
+
+      // Lights
+      const ambientLight = new THREE.AmbientLight(0x666666);
+      scene.add(ambientLight);
+
+      // Loaders
+      const loader = new GLTFLoader();
+      loader.load(
+        model,
+        (gltf) => {
+          scene.add(gltf.scene);
+        },
+        (xhr) => {
+          console.info(`${xhr.loaded / xhr.total * 100}% loaded`);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
+      // Animation Loop
+      (function animate () {
+        // Render
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      })();
+
+      window.localStorage.removeItem('model');
+    }
+
     return this;
   }
 

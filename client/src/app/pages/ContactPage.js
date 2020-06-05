@@ -6,6 +6,7 @@ import pointer from '../_static/images/pointer.png';
 class ContactPage {
   async showContacts () {
     const contacts = await BAAS.getContacts();
+    console.log(contacts);
     return contacts.data.map((contact) => {
       return `
       <a href="#!${routes.WIEISWIE_DETAIL.replace(':id', contact.id)}" class="person-card" data-navigo>
@@ -49,7 +50,7 @@ class ContactPage {
           <div class="col-md-12">
             <h3>Belangrijkste contactpersonen</h3>
           </div>
-          <div class="col-md-12 person-cards">
+          <div class="col-md-12 person-cards contact">
             ${await this.showContacts()}
           </div>
         </div>
@@ -123,6 +124,12 @@ class ContactPage {
 
   async mount () {
     // Before the rendering of the page
+    const hamburgerElement = document.querySelector('.hamb');
+    const navElement = document.querySelector('.nav__list');
+    document.body.style.overflow = 'initial';
+    navElement.classList.remove('nav__list--show');
+    hamburgerElement.classList.add('fa-bars');
+    hamburgerElement.classList.remove('fa-times');
     return this;
   }
 

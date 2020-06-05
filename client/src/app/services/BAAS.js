@@ -1,4 +1,4 @@
-const DOMAIN = 'https://pgmgent-1920-students.github.io/case1-pgm-website-baas-pgmgent-ninageni/';
+const DOMAIN = 'https://pgmgent-1920-students.github.io/case1-pgm-website-baas-pgmgent-ninageni';
 
 class BAAS {
   static getBlog = async () => {
@@ -37,7 +37,7 @@ class BAAS {
   static getContacts = async () => {
     const response = await fetch(`${DOMAIN}/medewerkers/medewerkers.json`);
     const jsonData = await response.json();
-    // console.log(jsonData.filter((value) => value.importantContact));
+
     return {
       data: jsonData.filter(value => value.importantContact),
       domain: DOMAIN,
@@ -86,6 +86,15 @@ class BAAS {
     const jsonData = await response.json();
     return {
       data: jsonData,
+      domain: DOMAIN,
+    };
+  }
+
+  static getCasesOpVak = async (vak) => {
+    const response = await fetch(`${DOMAIN}/cases/cases.json`);
+    const jsonData = await response.json();
+    return {
+      data: jsonData.filter(project => project.vak === vak),
       domain: DOMAIN,
     };
   }

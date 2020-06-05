@@ -51,3 +51,16 @@
         margin-top: 25px;
     }
 }
+
+@media (max-width: 500px) {
+    .home-content {
+        flex-direction: column;
+
+        &__pic {
+            width: 100%;
+            margin-bottom: 40px;
+            padding-right: 0;
+        }
+    }
+
+}

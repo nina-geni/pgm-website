@@ -2,13 +2,21 @@ import { BAAS } from '../services';
 import { routes } from '../router';
 
 class BlogPage {
-  async showBlog () {
-    const blogs = await BAAS.getBlog();
-    return blogs.data.map(
+  constructor () {
+    this.blogs = {};
+  }
+
+  async getDataBlogs () {
+    this.blogs = await BAAS.getBlog();
+  }
+
+  showBlog (page = 1) {
+    const blogsPage = this.blogs.data.slice(page * 4 - 4, page * 4);
+    return blogsPage.map(
       blog => `
         <a href="#!${routes.BLOG_DETAIL.replace(':id', blog.id)}" class="main-card" data-navigo>
           <div class="main-card__img">
-            <img src="${blogs.domain}${blog.img}">
+            <img src="${this.blogs.domain}${blog.img}">
           </div>
           <div class="main-card__overlay"></div>
           <div class="main-card__text">
@@ -17,6 +25,18 @@ class BlogPage {
           </div>
         </a>`
     ).join('');
+  }
+
+  makePagination (data) {
+    let tempStr = '';
+    let page = 1;
+
+    for (let i = 0; i <= data.length; i += 4) {
+      tempStr += `<a href="" id="${page}" class="page-number">${page}</a>`;
+      page++;
+    }
+
+    return tempStr;
   }
 
   async render () {
@@ -34,8 +54,11 @@ class BlogPage {
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 main-cards">
+      <div class="col-md-12 col-sm-12 col-12 main-cards">
         ${await this.showBlog()}
+      </div>
+      <div class="col-md-12 pagination">
+        ${this.makePagination(this.blogs.data)}
       </div>
     </div>
   </div>
@@ -43,11 +66,35 @@ class BlogPage {
   }
 
   async afterRender () {
+    const pages = document.querySelectorAll('.page-number');
+    pages[0].classList.add('active-page');
+
+    pages.forEach((page) => {
+      page.addEventListener('click', (e) => {
+        e.preventDefault();
+        let pageNumber = e.target.id;
+        pageNumber = parseInt(pageNumber, 10);
+
+        document.querySelector('.main-cards').innerHTML = this.showBlog(pageNumber);
+
+        pages.forEach((el) => {
+          el.classList.remove('active-page');
+        });
+
+        e.target.classList.add('active-page');
+      });
+    });
   }
 
   async mount () {
     // Before the rendering of the page
-    return this;
+    const hamburgerElement = document.querySelector('.hamb');
+    const navElement = document.querySelector('.nav__list');
+    document.body.style.overflow = 'initial';
+    navElement.classList.remove('nav__list--show');
+    hamburgerElement.classList.add('fa-bars');
+    hamburgerElement.classList.remove('fa-times');
+    await this.getDataBlogs();
   }
 
   async unmount () {

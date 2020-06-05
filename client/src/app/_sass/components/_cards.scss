@@ -2,6 +2,10 @@
     display: none;
     justify-content: space-between;
     flex-wrap: wrap;
+
+    &.contact {
+        display: flex;
+    }
 }
 .show-persons {
     display: flex;
@@ -104,5 +108,19 @@
         width: 100%;
         height: 100%;
         border-radius: 40px;
+    }
+}
+@media (max-width: 500px) {
+    .main-card {
+
+        &__title {
+            width: 290%;
+        }
+        &__text {
+            font-size: 25px;
+        }
+    }
+    .person-cards {
+        justify-content: center;
     }
 }

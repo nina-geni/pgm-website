@@ -4,6 +4,9 @@ import { routes } from '../router';
 class BlogDetailPage {
   async showPost (id) {
     const post = await BAAS.getPost(id);
+    if(post.data === undefined) {
+      window.location.assign('#!/404');
+    }
     return `
       <div class="detail-titlepic">
         <h3>${post.data.title}</h3>

@@ -4,6 +4,9 @@ class WieIsWieDetail {
   async showMember (id) {
     const memberMedewerker = await BAAS.getTeamMedewerker(parseInt(id, 10));
     const memberStudent = await BAAS.getTeamStudent(id);
+    if (memberMedewerker.data === undefined && memberStudent.data === undefined) {
+      window.location.assign('#!/404');
+    }
     let tempStr = '';
     console.log(memberMedewerker.data);
     console.log(memberStudent.data);
